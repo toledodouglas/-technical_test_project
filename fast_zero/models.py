@@ -15,6 +15,7 @@ class User:
     username: Mapped[str] = mapped_column(unique=True)
     uf: Mapped[str] = mapped_column(nullable=False)
     email: Mapped[str] = mapped_column(unique=True, nullable=False)
+    dataNasc: Mapped[str] = mapped_column()
     created_at: Mapped[datetime] = mapped_column(
         init=False, server_default=func.now()
     )

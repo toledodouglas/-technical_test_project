@@ -42,7 +42,7 @@ def create_user(user: UserSchema, session: Session = Depends(get_session)):
             )
 
     db_user = User(
-        username=user.username, email=user.email, cpf=user.cpf, uf=user.uf
+        username=user.username, email=user.email, cpf=user.cpf, uf=user.uf, dataNasc=user.dataNasc
     )
 
     session.add(db_user)
@@ -83,22 +83,24 @@ def update_user(cpf: str, user: UserSchema, db: Session = Depends(get_session)):
         existing_user.email = user.email
     if user.uf:
         existing_user.uf = user.uf
+    if user.dataNasc:
+        existing_user.dataNasc = user.dataNasc
 
     db.commit()
     db.refresh(existing_user)
     return existing_user
 
 
-@app.delete('/users/{user_id}', response_model=Message)
-def delete_user(user_id: int, session: Session = Depends(get_session)):
-    db_user = session.scalar(select(User).where(User.id == user_id))
+@app.delete("/users/{cpf}/", response_model=Message)
+def delete_user(cpf: str, db: Session = Depends(get_session)):
+    db_user = db.query(User).filter_by(cpf=cpf).first()
 
     if not db_user:
         raise HTTPException(
             status_code=HTTPStatus.NOT_FOUND, detail='User not found'
         )
 
-    session.delete(db_user)
-    session.commit()
+    db.delete(db_user)
+    db.commit()
 
     return {'message': 'User deleted'}

@@ -12,6 +12,7 @@ class UserSchema(BaseModel):
     cpf: CPFDigits
     email: EmailStr
     uf: str
+    dataNasc: str
 
 
 class UserPublic(BaseModel):
@@ -20,6 +21,7 @@ class UserPublic(BaseModel):
     email: EmailStr
     model_config = ConfigDict(from_attributes=True)
     uf: str
+    dataNasc: str
 
 
 class UserList(BaseModel):
