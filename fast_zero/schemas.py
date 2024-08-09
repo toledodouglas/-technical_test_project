@@ -6,9 +6,12 @@ class Message(BaseModel):
 
 
 class UserSchema(BaseModel):
-    username: str
+    nome: str
+    CPF: str
+    dataNascimento: str
     email: EmailStr
-    senha: str
+    UF: str
+    
 
 
 class UserDB(UserSchema):
@@ -16,9 +19,11 @@ class UserDB(UserSchema):
 
 
 class UserPublic(BaseModel):
-    username: str
+    nome: str
+    dataNascimento: str
     email: EmailStr
-    id: int
+    UF: str
+    
 
 
 class UserList(BaseModel):
