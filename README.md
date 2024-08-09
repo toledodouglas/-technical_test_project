@@ -1,4 +1,4 @@
-# Projeto FastAPI
+# Teste Técnico AAWZ
 
 Este projeto é uma API construída com FastAPI para gerenciar usuários. A seguir estão as instruções para rodar o projeto e interagir com os endpoints disponíveis.
 
